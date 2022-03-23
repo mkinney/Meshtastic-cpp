@@ -35,3 +35,6 @@ First example is using serialib - see https://github.com/imabot2/serialib
 cd examples/using_serialib
 make
 ```
+
+Note: There were a few tweaks to get serialib to work.
+TODO: Need to create PR for those change.
