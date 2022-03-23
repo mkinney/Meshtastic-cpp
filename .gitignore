@@ -1,0 +1,6 @@
+.*swp
+.o
+examples/using_serialib/open_port
+nanopb/
+meshtastic/
+proto/
