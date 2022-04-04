@@ -1,8 +1,14 @@
 CPP_FLAGS = -std=c++0x
 INC_FLAGS = -I../../meshtastic -I../../nanopb
 
+all: open_port sendtext
+	echo Building
+
 open_port: serialib.o open_port.cpp admin.pb.o apponly.pb.o cannedmessages.pb.o channel.pb.o deviceonly.pb.o mesh.pb.o mqtt.pb.o portnums.pb.o radioconfig.pb.o remote_hardware.pb.o storeforward.pb.o telemetry.pb.o pb_encode.o  pb_decode.o pb_common.o
 	g++ -o open_port $(CPP_FLAGS) $(INC_FLAGS) open_port.cpp admin.pb.o apponly.pb.o cannedmessages.pb.o channel.pb.o deviceonly.pb.o mesh.pb.o mqtt.pb.o portnums.pb.o radioconfig.pb.o remote_hardware.pb.o storeforward.pb.o telemetry.pb.o pb_encode.o pb_decode.o pb_common.o serialib.o `pkg-config --cflags --libs protobuf`
+
+sendtext: serialib.o sendtext.cpp admin.pb.o apponly.pb.o cannedmessages.pb.o channel.pb.o deviceonly.pb.o mesh.pb.o mqtt.pb.o portnums.pb.o radioconfig.pb.o remote_hardware.pb.o storeforward.pb.o telemetry.pb.o pb_encode.o  pb_decode.o pb_common.o
+	g++ -o sendtext $(CPP_FLAGS) $(INC_FLAGS) sendtext.cpp admin.pb.o apponly.pb.o cannedmessages.pb.o channel.pb.o deviceonly.pb.o mesh.pb.o mqtt.pb.o portnums.pb.o radioconfig.pb.o remote_hardware.pb.o storeforward.pb.o telemetry.pb.o pb_encode.o pb_decode.o pb_common.o serialib.o `pkg-config --cflags --libs protobuf`
 
 serialib: serialib.cpp
 	g++ -c serialib.cpp
@@ -53,4 +59,4 @@ telemetry.pb.o:
 	g++ -c $(CPP_FLAGS) ../../meshtastic/telemetry.pb.cc
 
 clean:
-	rm *.o open_port
+	rm *.o open_port sendtext
